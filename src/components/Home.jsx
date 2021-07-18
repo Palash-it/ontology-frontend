@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import OntologyService from "../services/ontology.service";
+import { getPropertiesFromOntologyConfig } from "../services/helper.service";
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             searchResult: {},
-            isLoading: false,
             ontologyId : "",
             sysMsg : {
                 type : "",
@@ -58,29 +58,6 @@ class Home extends Component {
             });
         }
     };
-    
-    getConfigProperties(data,searchElement) {
-        if(data.hasOwnProperty("config")){
-            let property = data.config[searchElement];
-            if(!Array.isArray(property)){
-                return data.config[searchElement];
-            }
-            if(property && property.length > 0){
-                return (
-                    <ul className="list">{property.map((li, i) => <li key={i}>{li}</li>)}</ul> 
-                );
-            }
-        }
-    }
-
-    getList(property){
-        return (
-            property.forEach((element, index) => (
-                <li key={index}>{element}</li>
-            ))
-        );
-    }
-
 
     render() { 
         let { searchResult, ontologyId, sysMsg } = this.state;
@@ -109,7 +86,7 @@ class Home extends Component {
                             <table className = "table table-striped table-bordered">
                                 <tbody>
                                     <tr>
-                                        <td>ontologyId</td>
+                                        <td>OntologyId</td>
                                         <td>{searchResult.ontologyId}</td>
                                     </tr>
                                     <tr>
@@ -121,20 +98,20 @@ class Home extends Component {
                                         <td>{searchResult.status}</td>
                                     </tr>
                                     <tr>
-                                        <td>title</td>
-                                        <td>{this.getConfigProperties(searchResult,"title")}</td>
+                                        <td>Title</td>
+                                        <td>{getPropertiesFromOntologyConfig(searchResult,"title")}</td>
                                     </tr>
                                     <tr>
                                         <td>Description</td>
-                                        <td>{this.getConfigProperties(searchResult,"description")}</td>
+                                        <td>{getPropertiesFromOntologyConfig(searchResult,"description")}</td>
                                     </tr>
                                     <tr>
                                         <td>Definition Properties</td>
-                                        <td>{this.getConfigProperties(searchResult,"definitionProperties")}</td>
+                                        <td>{getPropertiesFromOntologyConfig(searchResult,"definitionProperties")}</td>
                                     </tr>
                                     <tr>
                                         <td>Synonym Properties</td>
-                                        <td>{this.getConfigProperties(searchResult,"synonymProperties")}</td>
+                                        <td>{getPropertiesFromOntologyConfig(searchResult,"synonymProperties")}</td>
                                     </tr>
                                 </tbody>
                             </table>

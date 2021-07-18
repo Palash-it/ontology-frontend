@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route, Switch } from "react-router-dom";
-import Ontologies from "../components/ViewOntologies";
-import AddOntology from "../components/AddOntology";
+import { Link } from "react-router-dom";
 
 class Navbar extends Component {
     state = {  }
@@ -9,7 +7,7 @@ class Navbar extends Component {
         return (  
             <div>
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
-                    <Link to={"/view-ontologies"} className="navbar-brand">
+                    <Link to={"/home"} className="navbar-brand ">
                         Ontology UI
                     </Link>
                     <div className="navbar-nav mr-auto">
@@ -25,12 +23,7 @@ class Navbar extends Component {
                     </li>
                     </div>
                 </nav>
-                <div className="container mt-3">
-                    <Switch>
-                        <Route exact path={["/", "/view-ontologies"]} component={Ontologies} />
-                        <Route exact path="/add-ontology" component={AddOntology} />
-                    </Switch>
-                </div>
+                
             </div>
        );
     }
