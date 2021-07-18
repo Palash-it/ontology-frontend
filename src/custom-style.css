@@ -1,0 +1,7 @@
+.search-section,.search-result{
+    border: 1px solid #DDDDDD;
+    padding: 20px;
+}
+.search-result{
+    background-color: #CCCCCC;
+}
